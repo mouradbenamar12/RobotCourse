@@ -9,10 +9,9 @@ public class Main {
     public static void main(String[] args) {
 
         JFrame jf = new JFrame("Jeu Robot");
-        jf.getContentPane().setLayout(new FlowLayout());
+        jf.getContentPane().setLayout(new BorderLayout());
 
-        JPanel jPanel = new JPanel();
-        jPanel.setPreferredSize(new Dimension(200, 300));
+
 
 
         ImageIcon RobotBlue = new ImageIcon("/Users/abdellebay/IdeaProjects/JeuxRobot/Images/RobotBleu.png");
@@ -23,17 +22,15 @@ public class Main {
         RobotNG RbGreen = new RobotNG("RobotBlue",0,0,"Est",RobotGreen);
         Thread ThreadBlue = new Thread(RbGreen);
 
-        jPanel.add(RbGreen);
-        jf.add(jPanel);
-        //jf.add(RbGreen,BorderLayout.NORTH);
-       //jf.add(new JLabel(RobotGreen),BorderLayout.SOUTH);
+        jf.add(RbGreen,BorderLayout.NORTH);
+        //jf.add(new JLabel(RobotGreen),BorderLayout.SOUTH);
         //jf.add(new JLabel(RobotRed),BorderLayout.EAST);
         //jf.add(new JLabel(RobotYellow),BorderLayout.WEST);
         jf.pack();
         jf.setSize(500,500);
+        jf.setLocationRelativeTo(null);
         jf.setVisible(true);
         //JOptionPane.showMessageDialog(null,"X:"+RbGreen.getLocationOnScreen().x+" Y:"+RbGreen.getLocationOnScreen().y,"Axe",JOptionPane.WARNING_MESSAGE);
-
 
         ThreadBlue.start();
 

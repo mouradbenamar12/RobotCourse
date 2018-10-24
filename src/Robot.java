@@ -6,11 +6,12 @@ class Robot extends JLabel implements Runnable {
     private String nom;
     private int x;
     private int y;
+    int i=1;
     private double rot=0.0;
     protected int vitess;
     private int energie;
     private int capacite;
-    protected ImageIcon imageIcon;
+    private ImageIcon imageIcon;
     private String direction;
 
 
@@ -31,7 +32,7 @@ class Robot extends JLabel implements Runnable {
 
         this.imageIcon=resizeimg(imageIcon);
         this.setIcon(this.imageIcon);
-        this.setLocation(0,0);
+        //this.setLocation(100,500);
 
 
     }
@@ -40,20 +41,46 @@ class Robot extends JLabel implements Runnable {
      */
     public void avance()
     {
-        switch (direction) {
+        while (i==1){
+            this.setLocation(70,70);
+            i++;
+        }
+
+        int fX0 = 0, // left x border
+                fX1 = 500, // right x border
+                fY0 = 0, // top y border
+                fY1 = 500; // bottom y border
+        int rX0, rX1, rY0, rY1; // keep these values updated width the rectangles position:
+        rX0 = this.getLocation().x;
+        rX1 = this.getLocation().x+120;
+        rY0 = this.getLocation().y;
+        rY1 = this.getLocation().y+120;
+// Then, to check if the rect is inside the frame:
+        if (
+                        rX0 >= fX0 &&
+                        rX1 <  fX1 &&
+                        rY0 >= fY0 &&
+                        rY1 <  fY1
+        ) { switch (direction) {
             case "Nord":
-                this.setLocation(this.getLocationOnScreen().x,this.getLocationOnScreen().y);
+                this.setLocation(this.getLocation().x,this.getLocation().y-1);
                 break;
             case "Est":
-                this.setLocation(this.getLocationOnScreen().x,this.getLocationOnScreen().y);
+                this.setLocation(this.getLocation().x-1,this.getLocation().y);
                 break;
             case "Sud":
-                this.setLocation(this.getLocationOnScreen().x,this.getLocationOnScreen().y);
+                this.setLocation(this.getLocation().x,this.getLocation().y+1);
                 break;
             case "Ouest":
-                this.setLocation(this.getLocationOnScreen().x,this.getLocationOnScreen().y);
+                this.setLocation(this.getLocation().x+1,this.getLocation().y);
                 break;
+        } }
+        else {
+            System.out.println("******************************************");
+
         }
+
+
 
     }
     /**
