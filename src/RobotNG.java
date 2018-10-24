@@ -57,10 +57,28 @@ public class RobotNG extends Robot{
             Collections.shuffle(lstIndexes);
             for(Integer index : lstIndexes) {
                 switch(index) {
-                    case 1: droite(); avance(); break;
-                    case 2: gauche(); avance(); break;
-                    case 3: demiTour(); avance(); break;
-                    case 4: avance(); break;
+                    case 1: droite(); avance();
+                        try {
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case 2: gauche(); avance();try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } break;
+                    case 3: demiTour(); avance();try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } break;
+                    case 4: avance();try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } break;
                 }
             }
         }

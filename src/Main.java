@@ -26,7 +26,7 @@ public class Main {
         Thread ThreadRed = new Thread(RbRed);
 
         jf.add(RbGreen,BorderLayout.NORTH);
-        jf.add(RbRed,BorderLayout.EAST);
+        jf.add(RbRed,BorderLayout.SOUTH);
         //jf.add(new JLabel(RobotGreen),BorderLayout.SOUTH);
         //jf.add(new JLabel(RobotRed),BorderLayout.EAST);
         //jf.add(new JLabel(RobotYellow),BorderLayout.WEST);
