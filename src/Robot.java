@@ -32,7 +32,6 @@ class Robot extends JLabel implements Runnable {
 
         this.imageIcon=resizeimg(imageIcon);
         this.setIcon(this.imageIcon);
-        //this.setLocation(100,500);
 
 
     }
@@ -42,14 +41,14 @@ class Robot extends JLabel implements Runnable {
     public void avance()
     {
         while (i==1){
-            this.setLocation(70,70);
+            this.setLocation(this.x,this.y);
             i++;
         }
 
         int fX0 = 0, // left x border
-                fX1 = 500, // right x border
+                fX1 = 1440, // right x border
                 fY0 = 0, // top y border
-                fY1 = 500; // bottom y border
+                fY1 = 820; // bottom y border
         int rX0, rX1, rY0, rY1; // keep these values updated width the rectangles position:
         rX0 = this.getLocation().x;
         rX1 = this.getLocation().x+120;
@@ -76,7 +75,46 @@ class Robot extends JLabel implements Runnable {
                 break;
         } }
         else {
-            System.out.println("******************************************");
+            /*switch (direction) {
+                case "Nord":
+                    System.out.println("changed to Sud");
+                    this.direction="Sud";
+                    this.setLocation(this.getLocation().x,this.getLocation().y+1);
+                    break;
+                case "Est":
+                    System.out.println("changed to Ouest");
+
+                    this.direction="Ouest";
+                    this.setLocation(this.getLocation().x+1,this.getLocation().y);
+                    break;
+                case "Sud":
+                    System.out.println("changed to Nord");
+
+                    this.direction="Nord";
+                    this.setLocation(this.getLocation().x,this.getLocation().y-1);
+                    break;
+                case "Ouest":
+                    System.out.println("changed to Est");
+
+                    this.direction="Est";
+                    this.setLocation(this.getLocation().x-1,this.getLocation().y);
+                    break;
+            }*/
+
+            if(this.getLocation().x<=-1){
+                this.direction="Est";
+                this.setLocation(this.getLocation().x+1,this.getLocation().y);
+            } else if (this.getLocation().x>=1320){
+                this.direction="Ouest";
+                this.setLocation(this.getLocation().x-1,this.getLocation().y);
+            }
+            if (this.getLocation().y<=-1){
+                this.direction="Sud";
+                this.setLocation(this.getLocation().x,this.getLocation().y+1);
+            }else if (this.getLocation().y>=700){
+                this.direction="Nord";
+                this.setLocation(this.getLocation().x,this.getLocation().y-1);
+            }
 
         }
 
