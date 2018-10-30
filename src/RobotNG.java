@@ -1,14 +1,22 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class RobotNG extends Robot{
+
+    Random rand = new Random();
+    private static RobotNG[] Score = new RobotNG[8];
+    protected static int i=0;
     private List<Integer> lstIndexes = new ArrayList<Integer>();
     public RobotNG(String nom)
     {
         super(nom);
     }
+
     public RobotNG(String nom, int x, int y, String direction, ImageIcon img)
     {
         super(nom, x, y, direction,img);
@@ -20,6 +28,7 @@ public class RobotNG extends Robot{
      */
     public void avance(int pas)
     {
+
         for (int i = 0 ; i < pas ; ++i) {
             avance();
         } }
@@ -40,6 +49,8 @@ public class RobotNG extends Robot{
         droite();
         droite(); }
 
+
+
     @Override
     public void run() {
         super.run();
@@ -54,33 +65,50 @@ public class RobotNG extends Robot{
         }
 //you can change the condition for the number of times you want to execute it
         while(true) {
-            Collections.shuffle(lstIndexes);
-            for(Integer index : lstIndexes) {
-                switch(index) {
-                    case 1: droite(); avance();
-                        try {
-                            Thread.sleep(50);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case 2: gauche(); avance();try {
-                        Thread.sleep(50);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } break;
-                    case 3: demiTour(); avance();try {
-                        Thread.sleep(50);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } break;
-                    case 4: avance();try {
-                        Thread.sleep(50);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } break;
+
+            if (this.getLocation().x>=1245){
+                if (!Thread.currentThread().isInterrupted()){
+                    Score[i] = this;
+                    Thread.currentThread().interrupt();
+                    i++;
+                    if (i==4){
+                        final JFrame frame = new JFrame("Score");
+                        String[] columns = {"Score", "Name"};
+                        Object[][] data = {
+                                {"1", Score[0].getNom()},
+                                {"2",Score[1].getNom()},
+                                {"3",Score[2].getNom()},
+                                {"4",Score[3].getNom()}
+                        };
+
+                        JTable table = new JTable(data, columns);
+                        JScrollPane scrollPane = new JScrollPane(table);
+                        table.setFillsViewportHeight(true);
+
+                        JLabel lblHeading = new JLabel("Score");
+                        lblHeading.setFont(new Font("Arial", Font.PLAIN,24));
+
+                        frame.getContentPane().setLayout(new BorderLayout());
+
+                        frame.getContentPane().add(lblHeading,BorderLayout.PAGE_START);
+                        frame.getContentPane().add(scrollPane,BorderLayout.CENTER);
+
+
+                        JButton btn = new JButton("OK");
+                        btn.addActionListener(e -> System.exit(0));
+                        btn.setSize(50,50);
+                        frame.add(btn,BorderLayout.PAGE_END);
+
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.setLocationRelativeTo(null);
+                        frame.setSize(550, 200);
+                        frame.setVisible(true);
+
+                    }
                 }
-            }
+
+
+            }else avance();
         }
 
     }
